@@ -1,18 +1,22 @@
 <template>
   <div class="switch-button__wrapper">
     <label class="switch-button">
-      <input type="checkbox" :checked="isActive" @change="toggleSwitch" @click="handleClick" />
+      <input type="checkbox" :checked="isActive" @change="toggleSwitch" />
       <span class="switch-button__slider"></span>
     </label>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 
 const isActive = ref(false)
-const toggleSwitch = () => (isActive.value = !isActive.value)
-const handleClick = () => console.log('clicked', isActive.value)
+const emit = defineEmits(['update:isActive'])
+
+const toggleSwitch = () => {
+  isActive.value = !isActive.value
+  emit('update:isActive', isActive.value)
+}
 </script>
 
 <style lang="scss" scoped>
