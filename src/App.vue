@@ -2,7 +2,8 @@
 import { ref } from 'vue'
 import { lightTheme, darkTheme } from '@/assets/themes.css'
 import SwitchButton from '@/components/switch-button/SwitchButton.vue'
-import TaskListForm from '@/components/task-list/TaskListForm.vue'
+import TaskCard from '@/components/task-card/TaskCard.vue'
+import './App.css.js'
 
 const currentTheme = ref(lightTheme)
 
@@ -14,7 +15,7 @@ const toggleTheme = () => {
 <template>
   <main :class="currentTheme">
     <SwitchButton @update:isActive="toggleTheme" />
-    <TaskListForm />
+    <TaskCard />
   </main>
 </template>
 

@@ -1,36 +1,26 @@
 import { mount } from '@vue/test-utils'
-import { createRouter, createWebHistory } from 'vue-router'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import App from '@/App.vue'
-import HomeView from '@/views/HomeView.vue'
-import AboutView from '@/views/AboutView.vue'
-
-const routes = [
-  { path: '/', component: HomeView },
-  { path: '/about', component: AboutView }
-]
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes
-})
+import { lightTheme, darkTheme } from '@/assets/themes.css'
 
 describe('App', () => {
-  beforeEach(async () => {
-    router.push('/')
-    await router.isReady()
-  })
+  it('toggles the theme when SwitchButton emits update:isActive', async () => {
+    const wrapper = mount(App)
 
-  it('renders the correct content', async () => {
-    const wrapper = mount(App, {
-      global: {
-        plugins: [router]
-      }
-    })
+    // Initially light theme
+    expect(wrapper.vm.currentTheme).toBe(lightTheme)
 
-    await router.push('/about')
-    await wrapper.vm.$nextTick()
+    // find the switch button component and trigger the update:isActive event
+    const switchButton = wrapper.findComponent({ name: 'SwitchButton' })
+    await switchButton.vm.$emit('update:isActive', true)
 
-    expect(wrapper.html()).toContain('About')
+    // Verify that the theme has changed to dark
+    expect(wrapper.vm.currentTheme).toBe(darkTheme)
+
+    // Trigger the event again
+    await switchButton.vm.$emit('update:isActive', false)
+
+    // Verify that the theme has changed back to light
+    expect(wrapper.vm.currentTheme).toBe(lightTheme)
   })
 })

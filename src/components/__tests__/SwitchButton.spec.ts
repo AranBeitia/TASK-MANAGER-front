@@ -24,4 +24,22 @@ describe('SwitchButton', () => {
     await input.trigger('click')
     expect((input.element as HTMLInputElement).checked).toBe(false)
   })
+
+  it('emits an event when the switch is toggled', async () => {
+    const wrapper = mount(SwitchButton)
+    const input = wrapper.find('input[type="checkbox"]')
+
+    // Simulate el click en el switch
+    await input.trigger('change')
+
+    // Verify that the event was emitted
+    expect(wrapper.emitted('update:isActive')).toBeTruthy()
+    expect(wrapper.emitted('update:isActive')?.[0]).toEqual([true])
+
+    // Simulate the switch being active
+    await input.trigger('change')
+
+    // Verify that the event was emitted again
+    expect(wrapper.emitted('update:isActive')?.[1]).toEqual([false])
+  })
 })
