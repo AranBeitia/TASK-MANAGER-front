@@ -12,3 +12,7 @@ export const CardContainer = style({
   width: '100%',
   backgroundColor: themeContract.color.background
 })
+
+export const CardSection = style({
+  padding: '0.5rem 0'
+})
