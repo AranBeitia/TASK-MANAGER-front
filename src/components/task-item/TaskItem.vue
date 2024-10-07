@@ -1,6 +1,6 @@
 <template>
   <div :class="ItemContainer">
-    <p>{{ task.title }}</p>
+    <p data-test="task-title">{{ task.title }}</p>
     <div>
       <button>Completar</button>
       <button>Borrar</button>
@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { ItemContainer, CardSection } from './TaskItem.css.js'
-import { Task } from '@/types'
+import { ItemContainer } from './TaskItem.css.js'
+import { Task } from '@/types/task.type'
 
 const props = defineProps<{
   task: Task
