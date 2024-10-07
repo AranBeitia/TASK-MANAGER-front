@@ -1,11 +1,19 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
+import { createPinia, setActivePinia } from 'pinia'
+import { describe, it, expect, beforeEach } from 'vitest'
 import App from '@/App.vue'
 import { lightTheme, darkTheme } from '@/assets/themes.css'
 
 describe('App', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
   it('toggles the theme when SwitchButton emits update:isActive', async () => {
-    const wrapper = mount(App)
+    const wrapper = mount(App, {
+      global: {
+        plugins: [createPinia()]
+      }
+    })
 
     // Initially light theme
     expect(wrapper.vm.currentTheme).toBe(lightTheme)

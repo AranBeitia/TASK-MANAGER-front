@@ -9,7 +9,7 @@
     <section :class="CardSection">
       <div>
         <div>
-          <task-list :taskList="tasks" />
+          <task-list :taskList="tasks" completed />
         </div>
       </div>
     </section>
@@ -23,9 +23,10 @@ import TaskListForm from '@/components/task-list/task-list-form/TaskListForm.vue
 import TaskList from '@/components/task-list/TaskList.vue'
 import taskService from '@/api/taskService'
 import { useTaskStore } from '@/stores/task.store'
+import { Task } from '@/types'
 
 const taskStore = useTaskStore()
-const tasks = ref([])
+const tasks = ref<Task[]>([])
 
 onMounted(async () => {
   const response = await getTaskList()

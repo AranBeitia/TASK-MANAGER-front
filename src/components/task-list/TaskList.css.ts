@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-export const TaskList = style({
+export const TaskListClass = style({
   maxHeight: '230px',
   overflowY: 'auto'
 })

@@ -1,24 +1,26 @@
 <template>
   <div>
-    <h2>Task TODO - 10</h2>
-    <div :class="TaskList">
-      <p v-for="task in taskList" :key="task._id">{{ task.title }}</p>
+    <h2>{{ completed ? 'DONE' : 'TODO' }} - {{ filteredTasks.length }}</h2>
+    <div :class="TaskListClass">
+      <task-item v-for="task in filteredTasks" :key="task._id" :task="task" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { TaskList } from './TaskList.css.js'
-
-interface Task {
-  id: number
-  title: string
-  completed: boolean
-}
+import { computed } from 'vue'
+import { TaskListClass } from './TaskList.css.js'
+import { Task } from '@/types'
+import TaskItem from '@/components/task-item/TaskItem.vue'
 
 const props = defineProps<{
   taskList: Task[]
+  completed?: boolean
 }>()
+
+const filteredTasks = computed(() =>
+  props.taskList.filter((task) => task.completed === props.completed)
+)
 </script>
 
 <style scoped></style>
