@@ -1,4 +1,4 @@
-import { createGlobalTheme, createTheme, createThemeContract } from '@vanilla-extract/css'
+import { createGlobalTheme, createTheme, createThemeContract, style } from '@vanilla-extract/css'
 
 const globalVars = createGlobalTheme(':root', {
   color: {
@@ -7,9 +7,27 @@ const globalVars = createGlobalTheme(':root', {
     tertiary: '#1d1825',
     light: '#ffffff',
     background: '#1d1825',
-    text: '#212529'
+    text: '#212529',
+    bgInput: '#CEAFF5'
+  },
+  spacing: {
+    small: '0.5rem',
+    medium: '1rem',
+    large: '1.5rem'
+  },
+  borderRadius: {
+    small: '0.25rem',
+    medium: '0.5rem'
   }
 })
+
+export const mixins = {
+  flexCenter: style({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  })
+}
 
 export const themeContract = createThemeContract({
   color: {
@@ -18,18 +36,20 @@ export const themeContract = createThemeContract({
     tertiary: 'color-tertiary',
     light: 'color-light',
     background: 'color-background',
-    text: 'color-text'
+    text: 'color-text',
+    bgInput: 'color-bgInput'
   }
 })
 
 export const lightTheme = createTheme(themeContract, {
   color: {
     primary: '#9e78cf',
-    secondary: '#6c757d',
-    tertiary: '#adb5bd',
+    secondary: '#15101c',
+    tertiary: '#9e78cf',
     light: '#ffffff',
     background: '#f8f9fa',
-    text: '#212529'
+    text: '#212529',
+    bgInput: '#CEAFF5'
   }
 })
 
@@ -40,6 +60,7 @@ export const darkTheme = createTheme(themeContract, {
     tertiary: '#1d1825',
     light: '#ffffff',
     background: '#343a40',
-    text: '#f8f9fa'
+    text: '#f8f9fa',
+    bgInput: 'transparent'
   }
 })

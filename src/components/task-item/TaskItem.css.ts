@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { themeContract } from '@/assets/themes.css'
+import { themeContract, mixins } from '@/assets/themes.css'
 
 export const ItemContainer = style({
   display: 'flex',
@@ -9,5 +9,12 @@ export const ItemContainer = style({
   marginBottom: '0.5rem',
   border: `2px solid ${themeContract.color.secondary}`,
   borderRadius: '0.5rem',
-  backgroundColor: themeContract.color.background
+  backgroundColor: themeContract.color.bgInput,
+  color: themeContract.color.secondary
 })
+
+export const IsDone = style({
+  textDecoration: 'line-through'
+})
+
+export const actions = style([mixins.flexCenter, {}])

@@ -10,7 +10,7 @@ export const CardContainer = style({
   padding: '3rem',
   minWidth: '600px',
   width: '100%',
-  backgroundColor: themeContract.color.background
+  backgroundColor: themeContract.color.tertiary
 })
 
 export const CardSection = style({
