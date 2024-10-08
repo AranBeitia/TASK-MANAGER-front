@@ -3,14 +3,12 @@
     <task-list-form />
     <section :class="CardSection">
       <div>
-        <task-list :taskList="tasks" />
+        <task-list />
       </div>
     </section>
     <section :class="CardSection">
       <div>
-        <div>
-          <task-list :taskList="tasks" completed />
-        </div>
+        <task-list completed />
       </div>
     </section>
   </article>
@@ -23,7 +21,7 @@ import TaskListForm from '@/components/task-list/task-list-form/TaskListForm.vue
 import TaskList from '@/components/task-list/TaskList.vue'
 import taskService from '@/api/taskService'
 import { useTaskStore } from '@/stores/task.store'
-import { Task } from '@/types'
+import type { Task } from '@/types/task.type.js'
 
 const taskStore = useTaskStore()
 const tasks = ref<Task[]>([])

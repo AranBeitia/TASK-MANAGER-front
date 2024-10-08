@@ -10,16 +10,17 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { TaskListClass } from './TaskList.css.js'
-import { Task } from '@/types/task.type'
+import { useTaskStore } from '@/stores/task.store'
 import TaskItem from '@/components/task-item/TaskItem.vue'
 
+const taskStore = useTaskStore()
+
 const props = defineProps<{
-  taskList: Task[]
   completed?: boolean
 }>()
 
 const filteredTasks = computed(() =>
-  props.taskList.filter((task) => task.completed === props.completed)
+  taskStore.taskList.filter((task) => task.completed === props.completed)
 )
 </script>
 

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <button :class="button" :disabled="isDisabled">{{ buttonText }}</button>
-    <slot></slot>
+    <button :class="button" :disabled="isDisabled"><slot></slot></button>
   </div>
 </template>
 
@@ -9,7 +8,6 @@
 import { button } from './BaseButton.css.js'
 
 const props = defineProps<{
-  buttonText: string
   isDisabled?: boolean
 }>()
 </script>

@@ -7,50 +7,21 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import taskService from '@/api/taskService'
+import { useTaskStore } from '@/stores/task.store'
 import { taskForm, taskInput, buttonStyle } from './TaskListForm.css.js'
 
-const task = ref('')
+const taskStore = useTaskStore()
+const task = ref<string>('')
 
-const addTask = (e) => {
+const addTask = async (e) => {
   e.preventDefault()
-  console.log('Adding a new task', task.value)
+  try {
+    const response = await taskService.createTask({ title: task.value })
+    taskStore.addTask(response.task)
+    return response
+  } catch (error) {
+    throw new Error('Error creating task', error)
+  }
 }
 </script>
-
-<!-- <style scoped lang="scss">
-.task-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &__input {
-    box-sizing: border-box;
-    display: block;
-    min-width: 200px;
-    width: 100%;
-    outline: 0;
-    padding: 0.5rem;
-    border-radius: 10px;
-    // border: 2px solid ${({ theme }) => theme.border};
-    // @include border-style($radius: 10px);
-    // background: ${({theme}) => theme.bgInput};
-  }
-
-  &__button {
-    // border: 2px solid ${({ theme }) => theme.border};
-    border-radius: 10px;
-    // background-color: var(--color-secondary);
-    transition: border-color 0.25s;
-
-    &:hover {
-      // background-color: var(--color-tertiary);
-      // color: var(--color-light);
-    }
-
-    &:focus,
-    &:focus-visible {
-      outline: 4px auto -webkit-focus-ring-color;
-    }
-  }
-}
-</style> -->

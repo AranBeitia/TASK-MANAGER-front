@@ -1,8 +1,8 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 interface Task {
-  id: number
+  _id: number
   title: string
   completed: boolean
 }
@@ -10,9 +10,15 @@ interface Task {
 export const useTaskStore = defineStore('task', () => {
   const taskList = ref<Task[]>([] as Task[])
 
-  const getTaskList = computed(() => taskList.value)
+  // const getTaskList = computed(() => taskList.value)
 
-  const setTaskList = (data: Task[]) => (taskList.value = data)
+  const setTaskList = (tasks: Task[]) => (taskList.value = tasks)
 
-  return { taskList, getTaskList, setTaskList }
+  const addTask = (task: Task) => taskList.value.push(task)
+
+  const removeTask = (id: number) => {
+    taskList.value = taskList.value.filter((task) => task._id !== id)
+  }
+
+  return { taskList, setTaskList, addTask, removeTask }
 })
