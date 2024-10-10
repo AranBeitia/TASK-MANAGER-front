@@ -3,6 +3,7 @@ import { mount, VueWrapper } from '@vue/test-utils'
 import TaskItem from '@/components/task-item/TaskItem.vue'
 import type { Task } from '@/types/task.type'
 import { IsDone } from '@/components/task-item/TaskItem.css'
+import { createPinia, setActivePinia } from 'pinia'
 
 describe('TaskItem', () => {
   let wrapper: VueWrapper<any>
@@ -14,8 +15,14 @@ describe('TaskItem', () => {
   }
 
   beforeEach(() => {
+    const pinia = createPinia()
+    setActivePinia(pinia)
+
     wrapper = mount(TaskItem, {
-      props: { task }
+      props: { task },
+      global: {
+        plugins: [pinia]
+      }
     })
   })
 

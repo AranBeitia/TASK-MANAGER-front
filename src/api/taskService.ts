@@ -14,6 +14,10 @@ export default {
   },
 
   async deleteTask(id: string) {
-    await apiClient.delete(`/tasks/id/${id}`)
+    const response = await apiClient.delete(`/tasks/id/${id}`)
+    console.log('ressss', response.data)
+
+    const { data } = await response
+    return data
   }
 }
