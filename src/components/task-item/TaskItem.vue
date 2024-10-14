@@ -2,7 +2,7 @@
   <div :class="ItemContainer" data-test="task-status">
     <p data-test="task-title" :class="{ [IsDone]: task.completed }">{{ task.title }}</p>
     <div :class="actions">
-      <base-button> <i class="fas fa-check"></i></base-button>
+      <base-button @click="handleComplete"> <i class="fas fa-check"></i></base-button>
       <base-button @click="handleDelete"> <i class="fas fa-trash"></i> </base-button>
     </div>
   </div>
@@ -20,6 +20,11 @@ const taskStore = useTaskStore()
 const props = defineProps<{
   task: Task
 }>()
+
+const handleComplete = async () => {
+  await taskService.completeTask(props.task._id)
+  taskStore.completeTask(props.task._id)
+}
 
 const handleDelete = async () => {
   await taskService.deleteTask(props.task._id)

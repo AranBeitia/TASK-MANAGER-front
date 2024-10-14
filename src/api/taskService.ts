@@ -1,23 +1,23 @@
-import apiClient from '.'
+// import type { Task } from '@/types/task.type'
+import apiClient from './index'
 
-export default {
-  async getTasks() {
+const taskService = {
+  getTasks: async () => {
     const response = await apiClient.get('/tasks')
-    const { data } = await response
-    return data
+    return response.data
   },
-
-  async createTask(task: { title: string }) {
+  createTask: async (task: { title: string }) => {
     const response = await apiClient.post('/tasks', task)
-    const { data } = await response
-    return data
+    return response.data
   },
-
-  async deleteTask(id: string) {
+  deleteTask: async (id: string) => {
     const response = await apiClient.delete(`/tasks/id/${id}`)
-    console.log('ressss', response.data)
-
-    const { data } = await response
-    return data
+    return response.data
+  },
+  completeTask: async (id: string) => {
+    const response = await apiClient.put(`/tasks/complete/id/${id}`)
+    return response.data
   }
 }
+
+export default taskService
